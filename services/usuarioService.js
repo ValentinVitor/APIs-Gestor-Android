@@ -27,7 +27,7 @@ class UsuarioService {
             const usuario = rows[0];
 
             // Verificar a senha
-            const senhaValida = await bcrypt.compare(senha, usuario.senha);
+            const senhaValida = await bcrypt.compare(senha, usuario.senha_hash);
             if (!senhaValida) {
                 throw new Error('Senha inválida');
             }

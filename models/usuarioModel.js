@@ -7,7 +7,7 @@ class UsuarioModel {
   // Criar um novo usuário
   static async criarUsuario(nome, email, senha) {
     const hashSenha = await bcrypt.hash(senha, 10); // Gerando o hash da senha
-    const query = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
+    const query = "INSERT INTO usuarios (nome, email, senha_hash) VALUES (?, ?, ?)";
     return db.promise().query(query, [nome, email, hashSenha]);
   }
 
