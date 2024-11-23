@@ -14,6 +14,24 @@ class UsuarioController {
     }
   }
 
+
+  // Atualiza dados do usuário
+  static async atualizarUsuario(req, res) {
+    try {
+      const { nome, email, senha } = req.body;
+      const id = req.params.id; // O id será passado como parâmetro na URL (exemplo: /usuarios/:id)
+
+      if (!id) {
+        return res.status(400).json({ error: 'ID do usuário é obrigatório' });
+      }
+
+      const result = await UsuarioService.atualizarUsuario(id, nome, email, senha);
+      res.status(200).json({ message: 'Usuário atualizado com sucesso!', data: result });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  }
+
   // Login do usuário
   static async login(req, res) {
     try {

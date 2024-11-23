@@ -15,6 +15,25 @@ class UsuarioService {
         }
     }
 
+    // Atualizar usuário pelo id
+    static async atualizarUsuario(id, nome, email, senha) {
+        try {
+            // Verificar se a senha foi fornecida, se sim, fazer o hash da nova senha
+            let senhaHash = senha;
+            if (senha) {
+                senhaHash = await bcrypt.hash(senha, 10);
+            }
+
+            const [result] = await UsuarioModel.atualizarUsuario(id, nome, email, senhaHash);
+            if (result.affectedRows === 0) {
+                throw new Error('Usuário não encontrado ou nenhum dado alterado');
+            }
+            return result;
+        } catch (err) {
+            throw new Error('Erro ao atualizar usuário: ' + err.message);
+        }
+    }
+
     // Autenticar um usuário
     static async autenticarUsuario(email, senha) {
         try {
