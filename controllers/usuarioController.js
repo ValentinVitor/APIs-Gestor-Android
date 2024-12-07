@@ -36,8 +36,8 @@ class UsuarioController {
   static async login(req, res) {
     try {
       const { email, senha } = req.body;
-      const result = await UsuarioService.autenticarUsuario(email, senha);
-      res.status(200).json({ message: 'Login realizado com sucesso!', token: result.token });
+      const { token, nome } = await UsuarioService.autenticarUsuario(email, senha);
+      res.status(200).json({ message: 'Login realizado com sucesso!', token, nome });
     } catch (err) {
       res.status(401).json({ error: err.message });
     }

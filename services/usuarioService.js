@@ -58,7 +58,10 @@ class UsuarioService {
                 { expiresIn: '1h' } // O token expira em 1 hora
             );
 
-            return { token };
+            return {
+                token,
+                nome: usuario.nome,
+            };
         } catch (err) {
             throw new Error('Erro na autenticação: ' + err.message);
         }
