@@ -19,6 +19,15 @@ class TarefaService {
         }
     }
 
+    static async atualizarTarefa(id, descricao, concluida) {
+        try {
+            const [result] = await TarefaModel.atualizarTarefa(id, descricao, concluida);
+            return result;
+        } catch (err) {
+            throw new Error('Erro ao atualizar tarefa: ' + err.message);
+        }
+    }
+
     static async deletarTarefa(id) {
         try {
             const [result] = await TarefaModel.deletarTarefa(id);

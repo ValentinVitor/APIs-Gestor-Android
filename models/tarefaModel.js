@@ -11,6 +11,11 @@ class TarefaModel {
         return db.promise().query(query);
     }
 
+    static atualizarTarefa(id, descricao, concluida) {
+        const query = 'UPDATE tarefas SET descricao = ?, concluida = ? WHERE id = ?';
+        return db.promise().query(query, [descricao, concluida, id]);
+    }
+
     static deletarTarefa(id) {
         const query = 'DELETE FROM tarefas WHERE id = ?';
         return db.promise().query(query, [id]);

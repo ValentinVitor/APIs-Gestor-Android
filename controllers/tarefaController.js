@@ -20,6 +20,17 @@ class TarefaController {
         }
     }
 
+    static async atualizarTarefa(req, res) {
+        try {
+            const { id } = req.params;
+            const { descricao, concluida } = req.body;
+            const result = await TarefaService.atualizarTarefa(id, descricao, concluida);
+            res.status(200).json({ message: 'Tarefa atualizada com sucesso!', data: result });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+
     static async deletarTarefa(req, res) {
         try {
             const { id } = req.params;
